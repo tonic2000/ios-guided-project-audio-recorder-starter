@@ -41,6 +41,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B65590FA243CDEAB005F1D38 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				BD8D4B692343EB1D001432F7 /* AppDelegate.swift */,
+				BD8D4B6B2343EB1D001432F7 /* SceneDelegate.swift */,
+				BD8D4B722343EB1E001432F7 /* Assets.xcassets */,
+				BD8D4BA52343ECF5001432F7 /* piano.mp3 */,
+				BD8D4B742343EB1E001432F7 /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		BD8D4B5D2343EB1D001432F7 = {
 			isa = PBXGroup;
 			children = (
@@ -60,14 +72,10 @@
 		BD8D4B682343EB1D001432F7 /* SimpleAudioRecorder */ = {
 			isa = PBXGroup;
 			children = (
-				BD8D4B692343EB1D001432F7 /* AppDelegate.swift */,
-				BD8D4B6B2343EB1D001432F7 /* SceneDelegate.swift */,
+				B65590FA243CDEAB005F1D38 /* Resources */,
 				BD8D4B7E2343EB38001432F7 /* AudioRecorderController.swift */,
 				874D724723D1537A006F83B9 /* AudioVisualizer.swift */,
 				BD8D4B7D2343EB38001432F7 /* Main.storyboard */,
-				BD8D4B722343EB1E001432F7 /* Assets.xcassets */,
-				BD8D4BA52343ECF5001432F7 /* piano.mp3 */,
-				BD8D4B742343EB1E001432F7 /* LaunchScreen.storyboard */,
 				BD8D4B772343EB1E001432F7 /* Info.plist */,
 			);
 			path = SimpleAudioRecorder;
