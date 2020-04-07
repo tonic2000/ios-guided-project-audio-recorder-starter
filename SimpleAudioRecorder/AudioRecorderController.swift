@@ -15,8 +15,21 @@ class AudioRecorderController: UIViewController {
     
     @IBOutlet var playButton: UIButton!
     @IBOutlet var recordButton: UIButton!
-    @IBOutlet var timeElapsedLabel: UILabel!
-    @IBOutlet var timeRemainingLabel: UILabel!
+    @IBOutlet var timeElapsedLabel: UILabel! {
+        didSet {
+            timeElapsedLabel.font = UIFont.monospacedDigitSystemFont(ofSize: timeElapsedLabel.font.pointSize,
+                                                                    weight: .regular)
+        }
+    }
+    
+    @IBOutlet var timeRemainingLabel: UILabel! {
+        didSet {
+
+            timeRemainingLabel.font = UIFont.monospacedDigitSystemFont(ofSize: timeRemainingLabel.font.pointSize,
+                                                                       weight: .regular)
+        }
+    }
+    
     @IBOutlet var timeSlider: UISlider!
     @IBOutlet var audioVisualizer: AudioVisualizer!
     
@@ -29,7 +42,6 @@ class AudioRecorderController: UIViewController {
             
         }
     }
-    
     
     private lazy var timeIntervalFormatter: DateComponentsFormatter = {
         // NOTE: DateComponentFormatter is good for minutes/hours/seconds
@@ -47,13 +59,8 @@ class AudioRecorderController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Use a font that won't jump around as values change
-        timeElapsedLabel.font = UIFont.monospacedDigitSystemFont(ofSize: timeElapsedLabel.font.pointSize,
-                                                          weight: .regular)
-        timeRemainingLabel.font = UIFont.monospacedDigitSystemFont(ofSize: timeRemainingLabel.font.pointSize,
-                                                                   weight: .regular)
-        
+      try? prepareAudioSession()
         loadAudio()
         updateViews()
     }
@@ -121,15 +128,16 @@ class AudioRecorderController: UIViewController {
         let songURL = Bundle.main.url(forResource: "piano", withExtension: "mp3")!
         
         audioPlayer = try? AVAudioPlayer(contentsOf: songURL)
+        audioPlayer?.isMeteringEnabled = true 
     }
     
-    /*
+    
     func prepareAudioSession() throws {
         let session = AVAudioSession.sharedInstance()
         try session.setCategory(.playAndRecord, options: [.defaultToSpeaker])
         try session.setActive(true, options: []) // can fail if on a phone call, for instance
     }
-    */
+    
     
     func play() {
         audioPlayer?.play()
@@ -228,7 +236,11 @@ class AudioRecorderController: UIViewController {
     }
     
     @IBAction func updateCurrentTime(_ sender: UISlider) {
-        
+        if isPlaying {
+              pause()
+          }
+          audioPlayer?.currentTime = TimeInterval(timeSlider.value)
+          updateViews()
     }
     
     @IBAction func toggleRecording(_ sender: Any) {
