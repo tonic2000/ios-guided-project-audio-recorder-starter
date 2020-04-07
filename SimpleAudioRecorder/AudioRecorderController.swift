@@ -39,6 +39,7 @@ class AudioRecorderController: UIViewController {
     var audioPlayer: AVAudioPlayer? {
         didSet {
             audioPlayer?.delegate = self
+            audioPlayer?.isMeteringEnabled = true  // works for both
             
         }
     }
@@ -128,7 +129,7 @@ class AudioRecorderController: UIViewController {
         let songURL = Bundle.main.url(forResource: "piano", withExtension: "mp3")!
         
         audioPlayer = try? AVAudioPlayer(contentsOf: songURL)
-        audioPlayer?.isMeteringEnabled = true 
+        audioPlayer?.isMeteringEnabled = true
     }
     
     
